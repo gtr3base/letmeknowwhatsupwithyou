@@ -1,6 +1,6 @@
 package org.gtr3base.service;
 
-import org.gtr3base.Cars;
+import org.gtr3base.enums.Cars;
 import org.gtr3base.model.Car;
 import org.springframework.stereotype.Service;
 

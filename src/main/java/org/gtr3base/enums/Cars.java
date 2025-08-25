@@ -1,4 +1,4 @@
-package org.gtr3base;
+package org.gtr3base.enums;
 
 public enum Cars {
     BMW_X5("X5",2023,60000, "Luxury Suv"),
