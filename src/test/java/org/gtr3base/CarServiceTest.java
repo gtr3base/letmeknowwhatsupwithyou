@@ -3,10 +3,14 @@ package org.gtr3base;
 import org.gtr3base.enums.Cars;
 import org.gtr3base.model.Car;
 import org.gtr3base.service.CarService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -15,6 +19,29 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class CarServiceTest {
     @InjectMocks
     private CarService carService;
+
+    private Map<String, Car> cars;
+
+    @BeforeEach
+    void setUp(){
+        cars = new HashMap<>();
+
+        cars.put("BMW_X5", Car.builder().carName("BMW_X5").model("X5").price(60000.0).year(2023).build());
+        cars.put("AUDI_A4", Car.builder().carName("AUDI_A4").model("A4").price(45000.0).year(2023).build());
+        cars.put("MERCEDES_C300", Car.builder().carName("MERCEDES_C300").model("C300").price(48000.0).year(2023).build());
+        cars.put("TOYOTA_CAMRY", Car.builder().carName("TOYOTA_CAMRY").model("Camry").price(28000.0).year(2023).build());
+
+        carService.setCars(cars);
+    }
+
+    @Test
+    void getCar_ShouldReturnExactMatchIfExists(){
+        Car result = carService.getCar("BMW_X5");
+
+        assertNotNull(result);
+        assertEquals("BMW_X5", result.getCarName());
+        assertEquals("X5", result.getModel());
+    }
 
     @Test
     void buildCar_ShouldReturnCarWithCorrectProps(){
@@ -52,4 +79,6 @@ public class CarServiceTest {
                 .model(carEnum.getModel())
                 .build();
     }
+
+
 }

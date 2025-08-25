@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class CarService {
-    private static final Map<String, Car> cars = new HashMap<>();
+    private static Map<String, Car> cars = new HashMap<>();
     static {
         for(Cars c : Cars.values()){
             cars.put(c.name(), buildCar(c));
@@ -103,5 +103,9 @@ public class CarService {
                 .stream()
                 .map(Car::getCarName)
                 .collect(Collectors.toList());
+    }
+
+    public void setCars(Map<String, Car> cars){
+        CarService.cars = cars;
     }
 }
